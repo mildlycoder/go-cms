@@ -4,7 +4,11 @@ module.exports = {
     "./public/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'lexend': ['"Lexend Deca"', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }

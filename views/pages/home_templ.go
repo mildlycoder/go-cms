@@ -40,7 +40,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-screen bg-blue-600 text-white flex items-center justify-center\"><div class=\"text-center\"><h1 class=\"text-5xl font-bold mb-4\">GO CMS APP</h1><p class=\"text-lg\">Welcome to your badass CMS built with Go and Echo.</p></div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-screen flex items-center justify-center\"><div class=\"text-center\"><h1 class=\"text-5xl font-bold mb-4\">GO CMS APP</h1><p class=\"text-lg\">Welcome to your badass CMS built with Go and Echo.</p></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

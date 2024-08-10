@@ -1,4 +1,5 @@
 vendor/
 tmp/
 node_modules/
+public/output.css
 
