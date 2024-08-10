@@ -1,0 +1,117 @@
+package homecomponents
+
+import (
+    "encoding/json"
+    "encoding/base64"
+)
+
+type Article struct {
+    ID         string `json:"id"`
+    Title      string `json:"title"`
+    Username   string `json:"username"`
+    City       string `json:"city"`
+    CoverImage string `json:"coverImage"`
+}
+
+templ ArticleCarousel() {
+    @carouselContent(dummyArticles())
+}
+
+templ carouselContent(topStories []Article) {
+    <div 
+        x-data="{ 
+            currentIndex: 0,
+            stories: []
+        }" 
+        x-init="stories = JSON.parse(atob($el.dataset.stories))"
+        class="relative w-full overflow-hidden rounded-lg shadow-lg"
+        data-stories={encodeStories(topStories)}
+    >
+        <div class="flex transition-transform duration-300 ease-in-out" x-ref="carousel">
+            <template x-for="(story, index) in stories" :key="index">
+                <div 
+                    class="flex-shrink-0 w-full h-[330px] bg-cover bg-no-repeat rounded-lg"
+                    :style="{ 'background-image': `url(${story.coverImage})` }"
+                >
+                    <a 
+                        :href="`/article/${story.id}`"
+                        class="flex flex-col justify-end w-full h-[90%] p-5 pt-[60px] rounded-lg bg-gradient-to-t from-black via-black/60 to-transparent"
+                    >
+                        <h1 class="text-2xl leading-8 text-white" x-text="story.title"></h1>
+                        <h2 class="flex items-center gap-2 text-sm font-light text-white">
+                            <span x-text="story.username"></span>
+                            <span class="w-1 h-1 bg-white/60 rounded-full"></span>
+                            <span class="uppercase text-white/60" x-text="story.city"></span>
+                        </h2>
+                    </a>
+                </div>
+            </template>
+        </div>
+        
+        <button 
+            @click="if (currentIndex > 0) { currentIndex--; $refs.carousel.style.transform = `translateX(-${currentIndex * 100}%)` }"
+            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white/80 p-2 rounded-full shadow-md"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        
+        <button 
+            @click="if (currentIndex < stories.length - 1) { currentIndex++; $refs.carousel.style.transform = `translateX(-${currentIndex * 100}%)` }"
+            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white/80 p-2 rounded-full shadow-md"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+}
+
+func dummyArticles() []Article {
+    return []Article{
+        {
+            ID:         "1",
+            Title:      "The Rise of Sustainable Fashion in New York",
+            Username:   "EcoFashionista",
+            City:       "New York",
+            CoverImage: "https://example.com/images/sustainable-fashion-ny.jpg",
+        },
+        {
+            ID:         "2",
+            Title:      "Tokyo's Hidden Culinary Gems",
+            Username:   "FoodExplorer",
+            City:       "Tokyo",
+            CoverImage: "https://example.com/images/tokyo-culinary-gems.jpg",
+        },
+        {
+            ID:         "3",
+            Title:      "London's Street Art Revolution",
+            Username:   "UrbanArtist",
+            City:       "London",
+            CoverImage: "https://example.com/images/london-street-art.jpg",
+        },
+        {
+            ID:         "4",
+            Title:      "The Tech Boom in Silicon Valley",
+            Username:   "TechGuru",
+            City:       "San Francisco",
+            CoverImage: "https://example.com/images/silicon-valley-tech.jpg",
+        },
+        {
+            ID:         "5",
+            Title:      "Paris: A Journey Through Time",
+            Username:   "HistoryBuff",
+            City:       "Paris",
+            CoverImage: "https://example.com/images/paris-history.jpg",
+        },
+    }
+}
+
+func encodeStories(stories []Article) string {
+    jsonData, err := json.Marshal(stories)
+    if err != nil {
+        return ""
+    }
+    return base64.StdEncoding.EncodeToString(jsonData)
+}
