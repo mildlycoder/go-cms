@@ -8,9 +8,7 @@ package pages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import (
-	"cms/views/layout"
-)
+import "cms/views/layout"
 
 func Signup() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -42,7 +40,7 @@ func Signup() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p>Signup page</p>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form class=\"flex flex-col max-w-[700px] p-6 mx-auto gap-2\" hx-post=\"/signup/createUser\"><div class=\"mb-4\"><h1 class=\"text-2xl font-normal text-left tracking-tight\">Sign Up</h1><h2 class=\"text-lg font-light mb-6 text-left text-gray-700 leading-7\">Enter your email and a secure password</h2><input name=\"email\" id=\"email\" type=\"email\" placeholder=\"Email\" class=\"w-full p-2 rounded-[6px] border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-red-500\"></div><div class=\"mt-4\"><input name=\"password\" id=\"password\" type=\"password\" placeholder=\"Password\" class=\"w-full p-2 rounded-[6px] border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-red-500\"></div><button type=\"submit\" class=\"flex justify-center py-2 px-4 rounded-[8px] text-sm font-medium transition-all duration-300 text-white bg-[#ff003d] border-none cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed\">Next</button><div class=\"flex flex-col justify-center items-center\"><h1 class=\"text-3xl font-bold text-center my-4\">Login</h1><div><a href=\"/auth/google\" class=\"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded\">Login with Google</a></div></div></form>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

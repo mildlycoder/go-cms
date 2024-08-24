@@ -1,0 +1,17 @@
+package pages
+
+import (
+	"cms/models"
+	"cms/views/layout"
+)
+
+templ Profile(user models.User) {
+	@layout.Base() {
+		<div class="min-h-screen flex flex-col items-center">
+			<div class="max-w-[750px]">
+				<span>Email: { user.Email }</span>
+				<span>Name: { user.Name }</span>
+			</div>
+		</div>
+	}
+}

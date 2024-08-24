@@ -1,17 +1,17 @@
 package pages
 
 import (
-	"cms/views/components/home-components"
 	"cms/views/layout"
 )
 
+type User struct {
+    Email         string `json:"email"`
+    Name         string `json:"name"`
+}
 templ Home() {
 	@layout.Base() {
-		<div class="min-h-screen flex items-center justify-center">
-			<div class="text-center">
-				<div class="max-w-[750px]">
-					@homecomponents.ArticleCarousel()
-				</div>
+		<div class="min-h-screen flex flex-col items-center">
+			<div class="max-w-[750px]">
 			</div>
 		</div>
 	}
